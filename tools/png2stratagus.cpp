@@ -62,7 +62,7 @@ public:
   int blue;
 
   Color ()
-    : red (0), green (255), blue (0)
+    : red (0), green (0), blue (0)
   {
   }
 
@@ -372,7 +372,6 @@ int main (int argc, char* argv[])
       mypng.set_color (44, Color (255, 0, 255));
       mypng.set_color (45, Color (255, 0, 255));
       mypng.set_color (46, Color (255, 0, 255));
-      mypng.set_color (47, Color (255, 0, 255));
 
       mypng.set_color (253, Color (255, 50, 255));
       mypng.set_color (255, Color (255, 255, 255));

@@ -83,8 +83,8 @@ bool IsHandleValid(HANDLE handle) {
 
 bool IsStreamValid(FILE *stream) {
 
-    return _fileno(stream) >= 0;
-
+    return _fileno(stream) > 0;
+	
 }
 
 bool IsFdValid(int fd) {
@@ -110,7 +110,7 @@ bool SetStreamAndFdFromStdConsole(FILE *stream, int fd, DWORD std, bool input) {
 
     /* Retrieves existing file descriptor from FILE* stream */
     int fd_old = _fileno(stream);
-    if (fd_old >= 0 && fd_old != fd_new) {
+    if (fd_old > 0 && fd_old != fd_new) {
         /* Reassigns new file descriptor to existing one from FILE* stream */
         if (_dup2(fd_new, fd_old) < 0) {
             _close(fd_new);
@@ -179,8 +179,7 @@ void SetupConsole() {
         SetStdHandle(STD_ERROR_HANDLE, errorHandle);
 
     /* And now STD_INPUT_HANDLE, STD_OUTPUT_HANDLE and STD_ERROR_HANDLE are valid and set correctly */
-
-    stdin_ok = (IsStreamValid(stdin) && IsFdValid(0));
+	stdin_ok = (IsStreamValid(stdin) && IsFdValid(0));
     stdout_ok = (IsStreamValid(stdout) && IsFdValid(1));
     stderr_ok = (IsStreamValid(stderr) && IsFdValid(2));
 
